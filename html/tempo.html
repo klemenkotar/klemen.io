@@ -1,0 +1,251 @@
+<html>
+  <head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/p5.js"></script>
+      
+      <link rel="stylesheet" type="text/css" href="../css/style.css">
+      <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      
+
+      
+      
+    <style>
+    body {
+        margin: 0;
+    }
+        
+    .title {
+        position: absolute;
+        top: 10%;
+        width: 100%;
+        text-align: center;
+        
+    }
+        
+    .title > h1 {
+            font-size: 12rem;
+    }
+        
+    .title > p {
+            font-size: 2rem;
+            top: -5%;
+    }
+        
+
+    .arrow {
+        position: fixed;
+        padding: 20px;
+        z-index: 5;
+        font-size: 3rem;
+        color: black;
+    }
+        
+    .description {
+        font-size: 2.5rem;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top:5%;
+        text-align: center;
+    }
+
+        
+    </style>
+
+      </head>
+      
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    
+<script>
+
+var loaded = false;
+var BLUE, RED;
+var tris = [];
+
+function preload(){
+	var script = document.createElement( 'script' );
+  	script.src = 'https://cdn.rawgit.com/ironwallaby/delaunay/master/delaunay.js';
+  	script.onload = function(){
+    	loaded = true;
+      	initializeTriangulation();
+    }
+    document.body.appendChild( script );
+}
+
+function setup(){
+    var backgroundCanvas = createCanvas( windowWidth, windowHeight );
+     backgroundCanvas.parent('myContainer');
+    
+    BLUE = color( '#292b36  ' ); //#1E2630
+    RED = color( '#994c92' );  //#FB3550
+    
+    initializeTriangulation();
+}
+
+function initializeTriangulation(){
+  	if( !loaded ) return;
+  	frameCount = 0;
+    tris = [];
+    var pts = [];
+    // push canvas rect points
+    pts.push( createVector( 0, 0 ) );
+    pts.push( createVector( width, 0 ) );
+    pts.push( createVector( width, height ) );
+    pts.push( createVector( 0, height ) );
+    
+    // add a certain nb of pts proportionally to the size of the canvas
+    // ~~ truncates a floating point number and keeps the integer part, like floor()
+    var n = ~~ ( width / 300 * height / 300 );
+    for( var i = 0; i < n; i ++ ){
+        pts.push( createVector( ~~ random( width ), ~~ random( height ) ) );
+    }
+    
+    // Now, let's use Delaunay.js
+    // Delaunay.triangulate expect a list of vertices (which should be a bunch of two-element arrays, representing 2D Euclidean points)
+    // and it will return you a giant array, arranged in triplets, representing triangles by indices into the passed array
+    // Array.map function let us create an Array of 2 elements arrays [ [x,y],[x,y],..] from our array of PVector [ PVector(x,y), PVector(x,y), ... ]
+    var triangulation = Delaunay.triangulate( pts.map( function( pt ){
+        return [ pt.x, pt.y ];
+    } ) );
+    
+    // create Triangles object using indices returned by Delaunay.triangulate
+    for( var i = 0; i < triangulation.length; i += 3 ){
+        tris.push( new Triangle(
+            pts[ triangulation[ i ] ],
+            pts[ triangulation[ i + 1 ] ],
+            pts[ triangulation[ i + 2 ] ]
+        ) );
+    }
+}
+
+// class for keeping triangles from 3 PVectors
+function Triangle( _a, _b, _c ){
+    // PVectors
+    this.a = _a;
+    this.b = _b;
+    this.c = _c;
+    
+    // used for fill using lerpColor
+    this.r = random(0.8);
+    
+    // used for drawing lines on triangles
+    // number of lines to draw proportionnally to the triangle size
+    this.n = ~~( dist( 
+        _a.x, _a.y,
+        ( this.b.x + this.c.x ) / 2, ( this.b.y + this.c.y ) / 2
+    ) / random( 25, 50 ) ) + 1 ;
+    // direction point for the lines
+    this.drawTo = ~~ random( 3 );
+    
+    this.draw = function(){
+        noStroke();
+        fill( lerpColor( RED, BLUE, this.r ) );
+        
+        triangle( this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y );
+        
+        switch( this.drawTo ){
+            case 0:
+                this.drawLines( this.a, this.b, this.c );
+                break;
+            case 1:
+                this.drawLines( this.c, this.a, this.b );
+                break;
+            case 2:
+                this.drawLines( this.b, this.a, this.c );
+                break;
+        }
+        
+        stroke( BLUE );
+        strokeJoin( BEVEL );
+        strokeWeight( 15 );
+        noFill();
+        triangle( this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y );
+    };
+    
+    this.drawLines = function( from, to1, to2 ){
+        var c = cos( frameCount / 360 * TWO_PI ) / 2;
+        
+        for( var i = 1; i <= this.n ; i++ ){
+            var p1 = createVector( 
+                lerp( from.x, to1.x, ( i - 1 ) / this.n ), 
+                lerp( from.y, to1.y, ( i - 1 ) / this.n )
+            );
+            var p2 = createVector(
+                lerp( from.x, to2.x, ( i - 1 ) / this.n ),
+                lerp( from.y, to2.y, ( i - 1 ) / this.n )
+            );
+            var p3 = createVector(
+                lerp( from.x, to2.x, ( i - 0.5 + c ) / this.n ),
+                lerp( from.y, to2.y, ( i - 0.5 + c ) / this.n )
+            );
+            var p4 = createVector( 
+                lerp( from.x, to1.x, ( i - 0.5 + c ) / this.n ), 
+                lerp( from.y, to1.y, ( i - 0.5 + c ) / this.n )
+            );
+            
+            // line( p1.x, p1.y, p2.x, p2.y );
+            
+            noStroke();
+            fill( BLUE );
+            quad( p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y );
+        }
+    }
+}
+
+function draw(){
+    background( RED );
+    
+    tris.forEach( t => t.draw() );
+    
+    if( frameCount % 720 == 0 ) initializeTriangulation();
+}
+
+function mousePressed(){
+    initializeTriangulation();
+}
+
+function windowResized(){
+    resizeCanvas( windowWidth, windowHeight );
+    initializeTriangulation();
+}
+
+
+
+</script>
+    
+
+<script>
+ 
+    $(document).ready(function(){
+        $('html,body').delay(2000).animate({
+            scrollTop: $(window).scrollTop() + 100
+        })
+    });
+    
+</script>
+
+  <body class='white-background grey'>
+      
+      <div id='myContainer'></div>
+      
+      <a href='../home.html'><i class='back arrow ion-ios-arrow-thin-left grey'></i></a>
+      
+      
+      <div class='title white SFMono-light'><h1>TEMPO</h1><p>futurum nobis est</p></div>
+      
+      
+      <div class="description grey SFMono-light">Tempo was created to change the way we interact with each other. We are a new Social Network that allows you to send video time capsules called timeCubes to the future. They contain a video, that only gets released at a specific date. TimeCubes also contain a picture, text and a title, which will be visible all the time and will act as a teaser that will build anticipation. Instead of liking, users will be able to "Wait" timeCubes. Each user will have a timeLine that will contain all of the timeCubes they waited for. There will also be a feed of all of the new timeCubes that your friends will post, as well as a feed of timeCubes trending globally. Our mission is to establish a Social Time Capsule that will bridge the societies of today and tomorrow.</div>
+      
+      
+    
+    <div class="menu view-website SFMono-light">
+        <div class="menu light-green"><span class="menu-tedx-typed">
+        <a href='../tempo-executive-summary.pdf'><span class='backslash-rotate'>&#92;</span><span class='menu-translate'>Executive Summary</span></a>
+        </span></div>
+    </div>
+    
+      
+  </body>
+</html>

@@ -1,0 +1,31 @@
+.title {
+    margin-left: 20%;
+    margin-right: 20%;
+    Margin-top: 15%;
+    text-align: center;
+}
+
+.title-typed {
+    font-size: 8rem;
+}
+
+.motto-typed {
+    font-size: 2rem;
+}
+
+.explore {
+    margin-left: 20%;
+    margin-right: 20%;
+    Margin-top: 10%;
+    text-align: center !important;
+    font-family: SFMono-Light !important;
+
+}
+
+.about {
+    margin-left: 20%;
+    margin-top:10%;
+    margin-right: 20%;
+    text-align: left;
+    font-size: 1.8rem;
+}

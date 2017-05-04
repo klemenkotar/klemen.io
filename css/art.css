@@ -1,0 +1,33 @@
+body {
+    background-color: #fefeff;
+}
+
+.background-image {
+    background-image: url('../media/img/vchs.jpg');
+    height: 600px;
+    width: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: -10;
+    margin:-10;
+}
+
+
+.title {
+    font-size: 10rem;
+    text-align: center;
+    height: 600px;
+    margin: -10px;
+    padding: -10px;
+    background-color: rgba(74, 151, 153, 0.7);
+
+}
+
+.title-text {
+
+    padding-top: 15%;
+    opacity: 1 !important;
+    
+}

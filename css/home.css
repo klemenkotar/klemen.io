@@ -1,0 +1,93 @@
+
+
+
+/* Main CSS */
+
+
+
+/* Desktop Class Code */
+
+.welcome-text {
+    
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2%;
+    
+    text-align: left;
+    
+    font-size: 2rem;
+}
+
+.menu {
+    
+    margin-left: 20%;
+    margin-right: 50%;
+    margin-top: 5%;
+    
+    text-align: left;
+    
+    font-size: 2rem;
+    
+}
+
+.menu div {
+    margin-top: 5%;
+    cursor: pointer;
+
+}
+
+.backslash-rotate {
+   display: inline-block;
+}
+
+.menu div:hover .backslash-rotate {
+    
+  transform: rotate(-66deg);    
+  transition: transform 1s;
+    
+}
+
+.backslash-rotate {
+    
+
+  transform: rotate(0deg);
+  transition: transform 1s;
+    
+}
+
+
+.menu div:hover .menu-translate {
+    
+
+  transform: translate(1rem, 0);    
+  transition: transform 1s;
+    
+}
+
+.menu-translate {
+    
+  transform: translate(0%, 0);    
+  transition: transform 1s;
+  position: absolute;
+    
+}
+
+
+
+.big-block {
+    
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+    
+    height: 4000px;
+    width: 8000px;
+    
+    top: -2000px;
+    left: 2000px;
+    
+    position: absolute;
+        
+    z-index: 5;
+    
+}

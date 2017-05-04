@@ -1,0 +1,51 @@
+.what-is-art {
+    margin-left: 15%;
+    Margin-top: 5%;
+    text-align: left;
+    font-size: 5rem;
+}
+
+.anwser {
+    
+    margin-left: 15%;
+    Margin-top: 5%;
+    text-align: left;
+    font-size: 2rem;
+    
+}
+
+.anwser2-typed {
+    
+    font-size: 3rem;
+    
+}
+
+.font-6rem {
+    font-size: 6rem !important;
+}
+
+.font-2rem {
+    font-size: 2rem !important;
+}
+
+.explore-gallery {
+
+    margin-top:100%;
+
+    margin-bottom: 40%;
+    margin-left: 20%;
+    margin-right: 20%;
+    position: relative;
+    display: inline-block;
+/*    text-align: center !important;*/
+    color: #fefeff !important;
+}
+
+/*
+.explore-gallery a {
+    text-align: center !important;
+    margin-bottom: auto;
+    margin-right: auto;
+    
+}
+*/

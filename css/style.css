@@ -1,0 +1,269 @@
+/* Define Key Style Components */
+
+
+/* Import Font*/
+@font-face {
+    font-family: SFMono-Light;
+    src: url(../media/fonts/SFMono-Light.otf);
+}
+
+.SFMono-light {
+    font-family: SFMono-Light;
+}
+
+/* Set Main Colors */
+
+.blue {
+    color: #4a9799;
+}
+
+.blue a:hover, .blue a:visited, .blue a:link, .blue a:active
+{
+    text-decoration: none !important;
+    color: #4a9799 !important;
+}
+
+.blue-background {
+    background-color: #4a9799;
+}
+
+
+.red{
+    color: #b24e49;
+}
+.red a:hover, .red a:visited, .red a:link, .red a:active
+{
+    text-decoration: none !important;
+    color: #b24e49 !important;
+}
+.red-background {
+    background-color: #b24e49;
+}
+
+
+.purple {
+    color: #8887ba;
+}
+.purple a:hover, .purple a:visited, .purple a:link, .purple a:active
+{
+    text-decoration: none !important;
+    color: #8887ba !important;
+}
+.purple-background {
+    background-color: #8887ba;
+}
+
+
+.orange {
+    color: #c4926b;
+}
+.orange a:hover, .orange a:visited, .orange a:link, .orange a:active
+{
+    text-decoration: none !important;
+    color: #c4926b !important;
+}
+.orange-background {
+    background-color: #c4926b;
+}
+
+
+.violet {
+    color: #994c92;
+}
+.violet a:hover, .violet a:visited, .violet a:link, .violet a:active
+{
+    text-decoration: none !important;
+    color: #994c92 !important;
+}
+.violet-background {
+    background-color: #994c92;
+}
+
+
+.light-green {
+    color: #a1c182;
+}
+.light-green a:hover, .light-green a:visited, .light-green a:link, .light-green a:active
+{
+    text-decoration: none !important;
+    color: #a1c182 !important;
+}
+.light-green-background {
+    background-color: #a1c182;
+}
+
+
+.dark-green {
+    color: #75b16e;
+}
+.dark-green a:hover, .dark-green a:visited, .dark-green a:link, .dark-green a:active
+{
+    text-decoration: none !important;
+    color: #75b16e !important;
+}
+.dark-green-background {
+    background-color: #75b16e;
+}
+
+
+.white {
+    color: #fefeff;
+}
+.white a:hover, .white a:visited, .white a:link, .white a:active
+{
+    text-decoration: none !important;
+    color: #fefeff !important;
+}
+.white-background {
+    background-color: #fefeff;
+}
+
+
+.grey {
+    color: #333333
+}
+.grey a:hover, .grey a:visited, .grey a:link, .grey a:active
+{
+    text-decoration: none !important;
+    color: #333333 !important;
+}
+.grey-background {
+    background-color: #333333
+}
+
+
+/* Overarching Rules */
+
+body {
+    background-color: #292b36;
+}
+
+
+
+
+.codrops-icon {
+	display: inline-block;
+	padding: 0 0.65em;
+}
+
+
+/* CSS Animations */
+
+
+
+.menu {
+    
+    margin-left: 20%;
+    margin-right: 50%;
+    margin-top: 5%;
+    
+    text-align: left;
+    
+    font-size: 2rem;
+    
+}
+
+.menu div {
+    margin-top: 5%;
+    cursor: pointer;
+
+}
+
+.backslash-rotate {
+   display: inline-block;
+}
+
+.menu div:hover .backslash-rotate {
+    
+  transform: rotate(-66deg);    
+  transition: transform 1s;
+    
+}
+
+.backslash-rotate {
+    
+
+  transform: rotate(0deg);
+  transition: transform 1s;
+    
+}
+
+
+.menu div:hover .menu-translate {
+    
+
+  transform: translate(1rem, 0);    
+  transition: transform 1s;
+    
+}
+
+.menu-translate {
+    
+  transform: translate(0%, 0);    
+  transition: transform 1s;
+  position: absolute;
+    
+}
+
+
+
+
+
+
+
+
+
+
+/* Typed.js CSS */
+
+.typed-cursor{
+	opacity: 1;
+	-webkit-animation: blink 0.7s infinite;
+	-moz-animation: blink 0.7s infinite;
+	animation: blink 0.7s infinite;
+}
+@keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-moz-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
